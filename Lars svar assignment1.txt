@@ -1,0 +1,21 @@
+6.1.2:
+import requests
+import pandas as pd
+response = requests.get('https://job.jobnet.dk/CV/FindWork/Search')
+response_dict = response.json()
+d = pd.DataFrame([response_dict])
+
+6.1.3:
+df = pd.DataFrame(response_dict['JobPositionPostings'])
+
+8.1.2:
+import requests
+from bs4 import BeautifulSoup
+url = 'https://datacvr.virk.dk/data/visninger?soeg=euphemia%20media&language=da'
+response = requests.get(url)
+html = response.text
+soup = BeautifulSoup(html,'html.parser')
+cvr_class = soup.find('div', attrs={'class' : 'cvr'})
+p_items = cvr_class.find_all('p')
+cvr_str = str(p_items[1])
+cvr = cvr_str[3:11]
